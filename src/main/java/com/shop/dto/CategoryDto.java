@@ -10,10 +10,12 @@ public class CategoryDto {
 
     private String title;
     private int lprice;
+    private String slink;
 
     public CategoryDto(JSONObject itemJson) {
         this.title = itemJson.getString("title");
         this.lprice = itemJson.getInt("lprice");
+        this.slink = itemJson.getString("link");
     }
 
 

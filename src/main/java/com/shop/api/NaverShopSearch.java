@@ -1,6 +1,7 @@
 package com.shop.api;
 
 import com.shop.dto.CategoryDto;
+import lombok.extern.java.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.*;
@@ -12,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
+@Log
 public class NaverShopSearch {
     public List<CategoryDto> search(String query) {
         RestTemplate rest = new RestTemplate();
@@ -42,11 +44,6 @@ public class NaverShopSearch {
             CategoryDto categoryDto = new CategoryDto(itemJson);
             ret.add(categoryDto);
         }
-        for (int i=0; i < ret.size(); i++) {
-
-            System.out.println(ret.get(i).getTitle());
-            System.out.println(ret.get(i).getLprice());
-        }
         return ret;
     }
 
@@ -65,8 +62,6 @@ public class NaverShopSearch {
         HttpStatus httpStatus = responseEntity.getStatusCode();
         int status = httpStatus.value();
         String response = responseEntity.getBody();
-//        System.out.println("Response status: " + status);
-//        System.out.println(response);
 
         return fromJSONtoItems2(response.toString());
     }
@@ -84,8 +79,9 @@ public class NaverShopSearch {
 
         for (int i=0; i < ret.size(); i++) {
 
-            System.out.println(ret.get(i).getTitle());
-            System.out.println(ret.get(i).getLprice());
+            log.info(ret.get(i).getTitle());
+            log.info(ret.get(i).getSlink());
+
         }
 
 
